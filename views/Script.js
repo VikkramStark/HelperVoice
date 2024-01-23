@@ -34,7 +34,9 @@ let fine = ['then Whats up?','How can I help you?','Why you are here?'];
 
 let didnt = ['sorry I didnt get that','can you repeat what you said','Probably that was out of my context']; 
 
-// let created = ['The creator','GOAT','Zeus']   
+// let created = ['The creator','GOAT','Zeus'] 
+
+let imhappy = ["Be Happy Forever", "Happyness is everyones right"]  
 
 let nothing = ['be productive','go find a hobby','do something useful']; 
 
@@ -83,7 +85,8 @@ recog.onspeechend = function(){console.log('Speech Ended')};
 recog.onresult = function(event){
     console.log('processing...'); 
     let index = event.resultIndex;
-    let transcript = event.results[index][0].transcript;
+    let transcript = event.results[index][0].transcript.toLowerCase(); 
+    console.log(transcript); 
     input.value = transcript;
     
     if(transcript.includes('hey') || transcript.includes('hi') || transcript.includes('hay') || transcript.includes('hello')){
@@ -93,17 +96,25 @@ recog.onresult = function(event){
         speak(randPick(stark)); 
     }
     if(transcript.includes('how are you') || transcript.includes('how is your day')){
-        speak(randPick(care)); 
+        let res = randPick(care); 
+        speak(res);  
+        writeContent(res)  
     }
     if(transcript.includes('fine')){
         speak(randPick(fine)); 
     }
+    if(transcript.includes("i'm happy") || transcript.includes("i am happy")){ 
+        let res = randPick(imhappy); 
+        writeContent(res); 
+        speak(res);  
+    }
     if(transcript.includes('who is this') || transcript.includes('who are you') || transcript.includes('your name')){
-        speak('I am Jarvis'); 
-        writeContent("I am Jarvis"); 
+        speak('I am DuckAI'); 
+        writeContent("I am DuckAI");  
     } 
     if(transcript.includes('who created you') || transcript.includes('who coded you') || transcript.includes('who made you')){
-        // speak( 'I am created by '+randPick(created));   
+        // speak( 'I am created by '+randPick(created));  
+
     }
     if(transcript.includes('nothing')){
         speak(randPick(nothing)); 
